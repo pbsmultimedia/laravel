@@ -18,12 +18,12 @@ Route::get('/', function () {
 Route::get('/test','test\TestController@index');
 
 // should be on the API routes..?
-Route::get('wsdl/server', function () {
-    return response(new App\Http\Wsdl\WsdlDocumentation())
+Route::get('wsdl/server/{service}', function ($service) {
+    return response(new App\Http\Wsdl\WsdlDocumentation($service))
         ->header('Content-Type', 'text/xml');
 });
 
 // should this be on the API?
-Route::post('wsdl/server', function(){
-    new App\Http\Wsdl\WsdlServer;
+Route::post('wsdl/server/{service}', function($service){
+    new App\Http\Wsdl\WsdlServer($service);
 });

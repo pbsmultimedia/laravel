@@ -1,19 +1,25 @@
 <?php
 
 namespace App\Http\Wsdl;
-use App\Http\Wsdl\TestService as TestService;
+//use App\Http\Wsdl\TestService as TestService;
 
 class WsdlDocumentation {
 
     public $wsdl;
 
-    function __construct()
+    function __construct($service)
     {
+
+        // check if class exists..
+        if (!class_exists(__NAMESPACE__ . "\\" .$service)) {
+            die('service does not exist.');
+        }
+
         $autodiscover = new \Laminas\Soap\AutoDiscover();
         $autodiscover
-            ->setClass(TestService::class)
+            ->setClass(__NAMESPACE__ . "\\" .$service)
             ->setUri('http://40.84.190.73/wsdl/server') // this will be the endpoint on tools like SoapUI
-            ->setServiceName('MySoapService');
+            ->setServiceName($service);
 
         $this->wsdl = $autodiscover->generate()->toXml();
     }

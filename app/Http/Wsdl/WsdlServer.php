@@ -4,27 +4,24 @@ namespace App\Http\Wsdl;
 
 class WsdlServer
 {
-    /**
-     * This method takes ...
-     *
-     * @param string $arg
-     * @return string
-     */
-    public function test($arg)
+    function __construct($service)
     {
-        return "received $arg";
+        $options = array(
+            'uri' => 'http://40.84.190.73/wsdl/server',
+            'location' => 'http://40.84.190.73/wsdl/server' // what´s the diff?
+        );
+
+        $server = new \Laminas\Soap\Server(null, $options);
+
+        // check if class exists..
+        if (!class_exists(__NAMESPACE__ . "\\" .$service)) {
+            die('service does not exist.');
+        }
+
+        // Bind class to Soap Server:
+        $server->setClass( __NAMESPACE__ . "\\" .$service);
+
+        // Handle a request:
+        $server->handle();
     }
 }
-
-$options = array(
-    'uri' => 'http://uri.com',
-    'location' => 'http://location.com'
-);
-
-$server = new \Laminas\Soap\Server(null, $options);
-
-// Bind class to Soap Server:
-$server->setClass(WsdlServer::class);
-
-// Handle a request:
-$server->handle();
