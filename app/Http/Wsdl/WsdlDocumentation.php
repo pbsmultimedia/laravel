@@ -17,7 +17,7 @@ class WsdlDocumentation {
         $autodiscover = new \Laminas\Soap\AutoDiscover();
         $autodiscover
             ->setClass(__NAMESPACE__ . "\\" .$service)
-            ->setUri('http://40.84.190.73/wsdl/server') // this will be the endpoint on tools like SoapUI
+            ->setUri('http://40.84.190.73/wsdl/server/'.$service) // this will be the endpoint on tools like SoapUI
             ->setServiceName($service);
 
         $this->wsdl = $autodiscover->generate()->toXml();

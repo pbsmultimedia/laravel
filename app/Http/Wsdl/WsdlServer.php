@@ -7,8 +7,8 @@ class WsdlServer
     function __construct($service)
     {
         $options = array(
-            'uri' => 'http://40.84.190.73/wsdl/server',
-            'location' => 'http://40.84.190.73/wsdl/server' // what´s the diff?
+            'uri' => 'http://40.84.190.73/wsdl/server/'.$service,
+            'location' => 'http://40.84.190.73/wsdl/server'.$service // what´s the diff?
         );
 
         $server = new \Laminas\Soap\Server(null, $options);
