@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Wsdl;
-//use App\Http\Wsdl\TestService as TestService;
 
 class WsdlDocumentation {
 
