@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Wsdl;
+use App\Http\Wsdl\TestService as TestService;
 
 class WsdlDocumentation {
 
@@ -8,8 +9,8 @@ class WsdlDocumentation {
     {
         $autodiscover = new \Laminas\Soap\AutoDiscover();
         $autodiscover
-            ->setClass('App\Http\Wsdl\WsdlServer')
-            ->setUri('http://localhost/server.php')
+            ->setClass(TestService::class)
+            ->setUri('http://40.84.190.73/wsdl/server') // this will be the endpoint on tools like SoapUI
             ->setServiceName('MySoapService');
 
         $wsdl = $autodiscover->generate();
